@@ -65,3 +65,23 @@ Where:
 
 ## 🏗️ Model Architecture
 
+- **Input Layer:** Encoded token IDs
+- **Embedding Layer:** Learns dense word embeddings
+- **BiLSTM Layer:** Captures context from both directions
+- **Dense Layer:** Outputs probabilities for each possible tag
+- **Output Layer:** Entity classification per token
+
+---
+
+## 📌 Implementation Details
+
+### **1. Encoding Sentences & Labels**
+```python
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from sklearn.preprocessing import LabelEncoder
+
+label_encoder = LabelEncoder()
+encoded_labels = label_encoder.fit_transform(ner_labels)
+
+padded_sequences = pad_sequences(encoded_labels, maxlen=MAX_LEN, padding="post")
+
